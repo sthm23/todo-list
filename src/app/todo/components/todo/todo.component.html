@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="title">
+    <h4>{{todoCard.title}}</h4>
+  </div>
+  <div class="btn-block">
+    <button mat-icon-button>
+      <mat-icon *ngIf="todoCard.completed">edit</mat-icon>
+      <mat-icon *ngIf="!todoCard.completed">check_circle_outline</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>launch</mat-icon>
+    </button>
+  </div>
+</div>
