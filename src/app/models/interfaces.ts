@@ -1,6 +1,6 @@
 
 export const url = 'http://localhost:4200/api';
-// export const url = 'https://joldibaev.uz/api';
+export const url2 = 'https://joldibaev.uz';
 export interface Todo {
   id: string,
   title: string,

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login, LoginResponse, url } from '../models/interfaces';
 import { Observable } from 'rxjs';
@@ -13,9 +13,7 @@ export class LoginService {
   ) { }
 
   logIn(body:Login):Observable<LoginResponse> {
-    // const headers = new HttpHeaders().append('Access-Control-Allow-Origin', url);
-
-    return this.http.post<LoginResponse>(url+'/auth/token/login/', body)//, {headers});
+    return this.http.post<LoginResponse>(url+'/auth/token/login/', body);
   }
 
 }

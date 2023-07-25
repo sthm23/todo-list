@@ -36,6 +36,22 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "todo-list:build",
+            "proxyConfig": "src/proxy.conf.mjs"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "todo-list:build:production"
+            },
+            "development": {
+              "browserTarget": "todo-list:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -83,22 +99,6 @@
             }
           },
           "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "todo-list:build:production"
-            },
-            "development": {
-              "browserTarget": "todo-list:build:development"
-            }
-          },
-          "options": {
-            "browserTarget": "todo-list:build",
-            "proxyConfig": "src/proxy.conf.json"
-          },
-          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
