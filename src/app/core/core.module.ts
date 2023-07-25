@@ -11,7 +11,7 @@ import { MaterialsModule } from '../materials/materials.module';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +19,7 @@ import { MaterialsModule } from '../materials/materials.module';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

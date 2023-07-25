@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Todo } from 'src/app/models/interfaces';
 
 @Component({
@@ -12,7 +13,15 @@ export class TodoComponent implements OnInit {
   @Input() todoCard!: Todo;
   @Output() changeTodoCard: EventEmitter<Todo> = new EventEmitter()
 
+  constructor(
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.checker = this.todoCard.completed
+  }
+
+  goToMoreTodo() {
+    this.router.navigate(['home', this.todoCard.id])
   }
 }
