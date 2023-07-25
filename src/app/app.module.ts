@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers } from './redux/reducers';
+import { todoReducer } from './redux/reducers/todo.reducer';
 
 
 @NgModule({
@@ -18,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     CoreModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({todo: todoReducer}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent]

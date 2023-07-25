@@ -2,12 +2,12 @@
   <div class="container">
     <div class="wrapper">
       <div class="logo">
-        <a [routerLink]="['/home']">ToDo</a>
+        ToDo
       </div>
       <div class="auth">
         <button mat-raised-button color="secondary" class="auth-btn"
         (click)="goToLogin()"
-        >{{logChecker ? logChecker : 'Log in'}}</button>
+        >{{(userName$ | async) ? (userName$ | async) : 'Log in'}}</button>
       </div>
     </div>
   </div>

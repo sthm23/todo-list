@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../login.service';
 import { ErrorMessage, Login } from 'src/app/models/interfaces';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from 'src/app/redux/actions/todo.actions';
+import { selectUserName } from 'src/app/redux/selectors/todo.selector';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   checkError = false
 
@@ -21,8 +24,13 @@ export class LoginComponent {
 
   constructor(
     private authServ:LoginService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
+
+  ngOnInit(): void {
+
+  }
 
   logIn() {
     if(this.form.valid) {
@@ -35,8 +43,10 @@ export class LoginComponent {
           return throwError(()=>err)
         }),
       ).subscribe(item=>{
-        localStorage.setItem('user_name', item.username)
-        localStorage.setItem('user_token', item.token)
+        this.store.dispatch(login({ userName: item.username, token: item.token }));
+
+        // localStorage.setItem('user_name', item.username)
+        // localStorage.setItem('user_token', item.token)
         this.router.navigate(['home'])
       })
     }
