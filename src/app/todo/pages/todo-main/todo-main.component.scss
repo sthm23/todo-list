@@ -1,0 +1,44 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 98vw;
+}
+
+.add-todo-block{
+  height: 150px;
+  display: flex;
+  align-items: center;
+}
+.todo-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.todo-block-wrapper{
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.add-todo-inp{
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 10px 5px;
+  font-size: larger;
+
+  &:focus{
+    outline: none;
+  }
+}
