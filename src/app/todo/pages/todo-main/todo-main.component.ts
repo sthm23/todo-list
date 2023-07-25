@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from 'src/app/models/interfaces';
 import { TodoServiceService } from '../../todo-service.service';
+import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-todo-main',
@@ -17,7 +18,12 @@ export class TodoMainComponent implements OnInit {
   filtered:Todo[] = []
 
   ngOnInit() {
-    this.completed = this.todoServ.getAllCards().filter(el=>!el.completed)
-    this.filtered = this.todoServ.getAllCards().filter(el=>el.completed)
+    this.todoServ.getAllCards().pipe(
+      map(el=>el.results),
+    ).subscribe(el=>{
+    this.completed = el.filter(el=>!el.completed)
+    this.filtered = el.filter(el=>el.completed)
+    })
+
   }
 }

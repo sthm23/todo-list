@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CreateTodo, Todo } from '../models/interfaces';
+import { CreateTodo, Todo, TodoResponse, url } from '../models/interfaces';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -89,7 +90,9 @@ export class TodoServiceService {
     }
   ]
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getOneCard(id: string):Todo | undefined {
     return this.todoList.find(el=>el.id === id)
@@ -111,7 +114,10 @@ export class TodoServiceService {
   }
 
   getAllCards() {
-    return this.todoList
+    const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
+    const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
+    // return this.todoList
+    return this.http.get<TodoResponse>(url+'/todo', {headers})
   }
 
   updateOneCard(id:string, card:CreateTodo) {

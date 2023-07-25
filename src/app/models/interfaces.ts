@@ -1,4 +1,5 @@
 
+export const url = 'https://joldibaev.uz/api';
 export interface Todo {
   id: string,
   title: string,
@@ -30,4 +31,8 @@ export interface LoginResponse {
   token: string,
   username: string,
   user_id: 1
+}
+
+export interface ErrorMessage {
+  message: string
 }

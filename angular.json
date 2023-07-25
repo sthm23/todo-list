@@ -94,6 +94,10 @@
               "browserTarget": "todo-list:build:development"
             }
           },
+          "options": {
+            "browserTarget": "todo-list:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

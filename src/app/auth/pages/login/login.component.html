@@ -1,1 +1,41 @@
-<p>login works!</p>
+<div class="wrapper">
+  <form [formGroup]="form" class="form">
+    <div class="input-block">
+      <label> Login:
+        <input
+        [ngClass]="{
+          'valid-input': form.controls['email'].valid,
+          'invalid-input': form.controls['email'].invalid && form.controls['email'].touched
+        }"
+        type="text" placeholder="Email" formControlName="email">
+      </label>
+      <small *ngIf="form.controls['email'].invalid && (form.controls['email'].touched)">
+        invalid email
+      </small>
+    </div>
+    <div class="input-block">
+      <label>Password:
+        <input
+        [ngClass]="{
+          'valid-input': form.controls['password'].valid,
+          'invalid-input': form.controls['password'].invalid && form.controls['password'].touched
+        }"
+        type="password" placeholder="Password" formControlName="password">
+      </label>
+      <small *ngIf="form.controls['password'].invalid && (form.controls['password'].touched)">
+        invalid password
+      </small>
+    </div>
+    <div class="btn-block">
+      <small *ngIf="checkError">
+        something goes wrong
+      </small>
+      <button type="button" mat-stroked-button
+      [disabled]="form.invalid"
+      (click)="logIn()"
+      >Login</button>
+
+    </div>
+  </form>
+
+</div>
