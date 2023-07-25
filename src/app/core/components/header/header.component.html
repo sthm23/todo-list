@@ -1,11 +1,13 @@
 <header>
   <div class="container">
     <div class="wrapper">
-      <div class="logo">Logo</div>
+      <div class="logo">
+        <a [routerLink]="['/home']">ToDo</a>
+      </div>
       <div class="auth">
         <button mat-raised-button color="secondary" class="auth-btn"
         (click)="goToLogin()"
-        >Log in</button>
+        >{{logChecker ? logChecker : 'Log in'}}</button>
       </div>
     </div>
   </div>

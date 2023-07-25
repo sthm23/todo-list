@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MaterialsModule } from '../materials/materials.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,6 +16,7 @@ import { MaterialsModule } from '../materials/materials.module';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialsModule
   ],
   exports: [

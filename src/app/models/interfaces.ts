@@ -35,5 +35,6 @@ export interface LoginResponse {
 }
 
 export interface ErrorMessage {
-  message: string
+  error: {message: string}
+  status: number
 }

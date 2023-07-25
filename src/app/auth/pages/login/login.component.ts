@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../login.service';
 import { ErrorMessage, Login } from 'src/app/models/interfaces';
-import { EMPTY, catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   })
 
   constructor(
-    private authServ:LoginService
+    private authServ:LoginService,
+    private router: Router
   ) {}
 
   logIn() {
@@ -27,14 +29,15 @@ export class LoginComponent {
       const obj = this.form.value as Login;
       this.authServ.logIn(obj).pipe(
         catchError((err: ErrorMessage)=>{
-          console.log(err);
-
-          this.checkError = true
-          return EMPTY
-        })
+          if(err.status === 400) {
+            window.alert(err.error.message)
+          }
+          return throwError(()=>err)
+        }),
       ).subscribe(item=>{
-        console.log(item);
-
+        localStorage.setItem('user_name', item.username)
+        localStorage.setItem('user_token', item.token)
+        this.router.navigate(['home'])
       })
     }
   }
