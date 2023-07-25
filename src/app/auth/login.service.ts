@@ -13,7 +13,9 @@ export class LoginService {
   ) { }
 
   logIn(body:Login):Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(url+'/auth/token/login/', body);
+    // const headers = new HttpHeaders().append('Access-Control-Allow-Origin', url);
+
+    return this.http.post<LoginResponse>(url+'/auth/token/login/', body)//, {headers});
   }
 
 }

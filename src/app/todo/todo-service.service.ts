@@ -117,7 +117,7 @@ export class TodoServiceService {
     const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
     const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
     // return this.todoList
-    return this.http.get<TodoResponse>(url+'/todo', {headers})
+    return this.http.get<TodoResponse>(url+'/todo/', {headers})
   }
 
   updateOneCard(id:string, card:CreateTodo) {

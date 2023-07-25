@@ -1,7 +1,6 @@
 {
-  "/api/*": {
-    "target": "https://joldibaev.uz/api/",
-    "secure": false,
-    "logLevel": "debug"
+  "/api": {
+    "target": "https://joldibaev.uz",
+    "secure": false
   }
 }
