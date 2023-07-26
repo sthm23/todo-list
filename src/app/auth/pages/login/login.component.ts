@@ -6,7 +6,6 @@ import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { login } from 'src/app/redux/actions/todo.actions';
-import { selectUserName } from 'src/app/redux/selectors/todo.selector';
 import { TodoState } from 'src/app/redux/reducers';
 
 @Component({

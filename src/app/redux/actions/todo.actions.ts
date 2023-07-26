@@ -7,7 +7,6 @@ export enum AppActions {
   todoCreate = '[Todo Page] create',
   todoUpdate = '[Todo Page] update',
   todoList = '[Todo Page] get all',
-  todoGet = '[Todo more Page] get one',
   todoDelete = '[Todo Page] delete'
 }
 
@@ -33,11 +32,6 @@ export const updateCard = createAction(
 export const getAllCards = createAction(
   AppActions.todoList,
   props<{todoList: Todo[]}>()
-);
-
-export const getOneCard = createAction(
-  AppActions.todoGet,
-  props<{ id: string }>()
 );
 
 export const deleteCard = createAction(

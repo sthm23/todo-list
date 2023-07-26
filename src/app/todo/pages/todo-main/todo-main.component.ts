@@ -26,16 +26,15 @@ export class TodoMainComponent implements OnInit {
     private store: Store<{todo:TodoState}>
   ) {}
 
-  allItems?:Observable<Todo[]> = this.store.select(selectAllCards);
+  allItems$:Observable<Todo[]> | null = this.store.select(selectAllCards);
 
   ngOnInit() {
     this.todoServ.getAllCards().pipe(
       catchError(err=>{
-        this.allItems = undefined
+        this.allItems$ = null
         return throwError(()=>err)
       })
     ).subscribe(el=>{
-      this.todoServ.todoList = el;
       this.store.dispatch(getAllCards({todoList: el}))
     })
 

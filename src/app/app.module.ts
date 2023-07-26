@@ -12,6 +12,7 @@ import { todoReducer } from './redux/reducers/todo.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { CreateAtEffects } from './redux/effects/todo.effects';
+import { INTERCEPTOR_PROVIDER } from './services/header-token.interceptor';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { CreateAtEffects } from './redux/effects/todo.effects';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([CreateAtEffects]),
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
