@@ -1,19 +1,30 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { State } from '../reducers';
+import { TodoState } from '../reducers';
 
-export const selectFeature = createFeatureSelector<State>('todo');
+export const selectFeature = createFeatureSelector<TodoState>('todo');
 
 export const selectAllCards = createSelector(
   selectFeature,
-  (state: State) => state.todoList
+  (state: TodoState) => state.todoList
 );
 
 export const selectUserName = createSelector(
   selectFeature,
-  (state: State) => state.userName
+  (state: TodoState) => state.userName
 );
 
 export const selectToken = createSelector(
   selectFeature,
-  (state: State) => state.token
+  (state: TodoState) => state.token
 );
+
+export const selectCompleteCards = createSelector(
+  selectFeature,
+  (state: TodoState) => state.complete
+);
+
+export const selectNotCompleteCards = createSelector(
+  selectFeature,
+  (state: TodoState) => state.notComplete
+);
+

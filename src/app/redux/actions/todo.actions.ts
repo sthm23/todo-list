@@ -1,41 +1,58 @@
 import { createAction, props } from '@ngrx/store';
+import { CreateTodo, Todo } from 'src/app/models/interfaces';
 
-interface LoginAction {
-  type: '[Login Page] Login',
-  username: string;
-  password: string;
+export enum AppActions {
+  login = '[Login Page] Login',
+  logout = '[Login Page] logout',
+  todoCreate = '[Todo Page] create',
+  todoUpdate = '[Todo Page] update',
+  todoList = '[Todo Page] get all',
+  todoCompList = '[Todo Page] get all Complete',
+  todoNotCompList = '[Todo Page] get all Not Complete',
+  todoGet = '[Todo more Page] get one',
+  todoDelete = '[Todo Page] delete'
 }
 
 export const login = createAction(
-  '[Login Page] Login',
+  AppActions.login,
   props<{ userName: string; token: string }>()
 );
 
 export const logout = createAction(
-  '[Login Page] logout'
+  AppActions.logout
 );
 
 export const createCard = createAction(
-  '[Todo Page] create',
-  props<{ email: string; password: string }>()
+  AppActions.todoCreate,
+  props<{ todo: CreateTodo }>()
 );
 
 export const updateCard = createAction(
-  '[Todo Page] update',
-  props<{ email: string; password: string }>()
+  AppActions.todoUpdate,
+  props<{ id: string; todo: CreateTodo }>()
 );
 
 export const getAllCards = createAction(
-  '[Todo Page] get all',
-  props<{ email: string; password: string }>()
+  AppActions.todoList,
+  props<{todoList: Todo[]}>()
+);
+
+export const getCompleteCards = createAction(
+  AppActions.todoCompList,
+  props<{todoList: Todo[]}>()
+);
+
+export const getNotCompleteCards = createAction(
+  AppActions.todoNotCompList,
+  props<{todoList: Todo[]}>()
 );
 
 export const getOneCard = createAction(
-  '[Todo more Page] get one',
-  props<{ email: string; password: string }>()
+  AppActions.todoGet,
+  props<{ id: string }>()
 );
 
 export const deleteCard = createAction(
-  '[Todo Page] delete',
-  props<{ email: string; password: string }>()
+  AppActions.todoDelete,
+  props<{ id: string }>()
 );

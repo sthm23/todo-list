@@ -1,5 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
+import { LoginService } from "../auth/login.service";
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,13 @@ import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } fr
 class PermissionsService {
   private token = localStorage.getItem('user_token')
 
-  constructor(private router:Router) {}
+  constructor(
+    private router:Router,
+    private authServ: LoginService,
+    ) {}
 
-  canActivate(): boolean | Promise<boolean> {
-    return this.token ? true : this.router.navigate(['auth', 'login'])
+  canActivate() {
+    return this.authServ.isLogin || this.token ? true : this.router.navigate(['auth', 'login'])
   }
 }
 

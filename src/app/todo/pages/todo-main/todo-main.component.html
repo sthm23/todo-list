@@ -5,18 +5,22 @@
       <mat-icon>note_add</mat-icon>
     </button>
   </div>
-  <div class="todo-block-wrapper">
+  <div class="todo-block-wrapper" *ngIf="(allItems | async);else loader">
     <div class="todo-block">
       <h2>Todo list</h2>
-      <div class="todo-list" *ngFor="let item of filtered">
+      <div class="todo-list" *ngFor="let item of filtered | async">
         <app-todo [todoCard]="item"></app-todo>
       </div>
     </div>
     <div class="complate">
       <h2>Complete list</h2>
-      <div class="todo-list" *ngFor="let item of completed">
+      <div class="todo-list" *ngFor="let item of completed | async">
         <app-todo [todoCard]="item"></app-todo>
       </div>
     </div>
   </div>
+
+  <ng-template #loader>
+    <app-spinner></app-spinner>
+  </ng-template>
 </div>

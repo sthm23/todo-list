@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
+  isLogin:boolean = false
+
   constructor(
     private http: HttpClient
   ) { }

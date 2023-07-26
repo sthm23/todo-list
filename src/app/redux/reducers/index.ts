@@ -10,17 +10,21 @@ import {
 import { Todo } from 'src/app/models/interfaces';
 import { createCard } from '../actions/todo.actions';
 
-export interface State {
+export interface TodoState {
   userName: string | null
   token: string | null
   todoList: Todo[]
+  complete: Todo[]
+  notComplete: Todo[]
 }
 
-export const initialState: State = {
+export const initialState: TodoState = {
   userName: null,
   token: null,
-  todoList: []
+  todoList: [],
+  complete: [],
+  notComplete: []
 };
-export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];
+export const metaReducers: MetaReducer<TodoState>[] = isDevMode() ? [] : [];
 
 

@@ -7,7 +7,7 @@
       <div class="auth">
         <button mat-raised-button color="secondary" class="auth-btn"
         (click)="goToLogin()"
-        >{{(userName$ | async) ? (userName$ | async) : 'Log in'}}</button>
+        >{{(userName$ | async) || name ?? 'Log in'}}</button>
       </div>
     </div>
   </div>

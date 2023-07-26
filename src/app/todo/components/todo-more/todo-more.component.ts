@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TodoServiceService } from '../../todo-service.service';
+import { TodoService } from '../../todo-service.service';
 import { Todo } from 'src/app/models/interfaces';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -14,7 +14,7 @@ export class TodoMoreComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private todoServ: TodoServiceService
+    private todoServ: TodoService
   ) {}
 
   checker = false

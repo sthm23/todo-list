@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { login } from 'src/app/redux/actions/todo.actions';
 import { selectUserName } from 'src/app/redux/selectors/todo.selector';
+import { TodoState } from 'src/app/redux/reducers';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private authServ:LoginService,
     private router: Router,
-    private store: Store
+    private store: Store<{todo:TodoState}>
   ) {}
 
   ngOnInit(): void {
-
+    const token = localStorage.getItem('user_token')
+    const user = localStorage.getItem('user_name')
+    if(user && token) {
+      this.store.dispatch(login({ userName: user, token }));
+    }
   }
 
   logIn() {
@@ -44,9 +49,9 @@ export class LoginComponent implements OnInit {
         }),
       ).subscribe(item=>{
         this.store.dispatch(login({ userName: item.username, token: item.token }));
-
-        // localStorage.setItem('user_name', item.username)
-        // localStorage.setItem('user_token', item.token)
+        localStorage.setItem('user_token', item.token)
+        localStorage.setItem('user_name', item.username)
+        this.authServ.isLogin = true
         this.router.navigate(['home'])
       })
     }
