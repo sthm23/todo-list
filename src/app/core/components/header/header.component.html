@@ -1,0 +1,14 @@
+<header>
+  <div class="container">
+    <div class="wrapper">
+      <div class="logo">
+        ToDo
+      </div>
+      <div class="auth">
+        <button mat-raised-button color="secondary" class="auth-btn"
+        (click)="goToLogin()"
+        >{{(userName$ | async) || name ?? 'Log in'}}</button>
+      </div>
+    </div>
+  </div>
+</header>
