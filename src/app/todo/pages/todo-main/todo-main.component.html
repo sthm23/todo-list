@@ -1,12 +1,15 @@
 <div class="wrapper">
-  <div class="add-todo-block">
-    <input type="text" class="add-todo-inp" placeholder="Add todo">
-    <button mat-icon-button>
+  <form [formGroup]="addCardForm" class="add-todo-block">
+    <input type="text" class="add-todo-inp" placeholder="Add todo" formControlName="title">
+    <button mat-icon-button (click)="addTodoCard()" [disabled]="addCardForm.invalid">
       <mat-icon>note_add</mat-icon>
     </button>
-  </div>
+  </form>
   <div class="todo-block-wrapper" *ngIf="(allItems | async);else loader">
-    <div class="todo-block">
+    <div class="todo-block" *ngFor="let item of allItems | async">
+      <app-todo [todoCard]="item"></app-todo>
+    </div>
+    <!-- <div class="todo-block">
       <h2>Todo list</h2>
       <div class="todo-list" *ngFor="let item of filtered | async">
         <app-todo [todoCard]="item"></app-todo>
@@ -17,7 +20,7 @@
       <div class="todo-list" *ngFor="let item of completed | async">
         <app-todo [todoCard]="item"></app-todo>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <ng-template #loader>

@@ -11,6 +11,7 @@ import { metaReducers } from './redux/reducers';
 import { todoReducer } from './redux/reducers/todo.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { CreateAtEffects } from './redux/effects/todo.effects';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserAnimationsModule,
     StoreModule.forRoot({todo: todoReducer}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([CreateAtEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]
