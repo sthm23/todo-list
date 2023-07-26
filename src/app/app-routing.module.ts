@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'auth', loadChildren: ()=>import('./auth/auth.module').then(m=>m.AuthModule)
   },
   {
-    path: 'error', component: NotFoundComponent
+    path: 'error', component: NotFoundComponent, title: 'Wrong url'
   },
   {
     path: '**', redirectTo: 'error', pathMatch: 'full'

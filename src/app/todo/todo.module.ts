@@ -24,13 +24,13 @@ import { TodoNotFoundComponent } from './pages/todo-not-found/todo-not-found.com
       {
         path: '', component: HomeComponent, children: [
           {
-            path: '', component: TodoMainComponent
+            path: '', component: TodoMainComponent, title: 'ToDo cards'
           },
           {
-            path: 'error', component: TodoNotFoundComponent
+            path: 'error', component: TodoNotFoundComponent, title: 'ToDo card not found'
           },
           {
-            path: '**', component: TodoMoreComponent, title: 'more info'
+            path: '**', component: TodoMoreComponent, title: 'Todo more info'
           },
         ]
       }
