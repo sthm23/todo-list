@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateTodo, Todo } from 'src/app/models/interfaces';
 import { TodoService } from '../../todo-service.service';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { TodoState } from 'src/app/redux/reducers';
-import { Store, createAction } from '@ngrx/store';
-import { createCard, getAllCards, getCompleteCards, getNotCompleteCards } from 'src/app/redux/actions/todo.actions';
-import { selectAllCards, selectCompleteCards, selectNotCompleteCards } from 'src/app/redux/selectors/todo.selector';
+import { Store } from '@ngrx/store';
+import { createCard, getAllCards } from 'src/app/redux/actions/todo.actions';
+import { selectAllCards } from 'src/app/redux/selectors/todo.selector';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -27,8 +27,6 @@ export class TodoMainComponent implements OnInit {
   ) {}
 
   allItems?:Observable<Todo[]> = this.store.select(selectAllCards);
-  completed:Observable<Todo[]> = this.store.select(selectCompleteCards)
-  filtered:Observable<Todo[]> = this.store.select(selectNotCompleteCards)
 
   ngOnInit() {
     this.todoServ.getAllCards().pipe(
@@ -39,12 +37,6 @@ export class TodoMainComponent implements OnInit {
     ).subscribe(el=>{
       this.todoServ.todoList = el;
       this.store.dispatch(getAllCards({todoList: el}))
-
-      const completed = el.filter(el=>!el.completed)
-      const filtered = el.filter(el=>el.completed)
-
-      this.store.dispatch(getCompleteCards({todoList: completed}))
-      this.store.dispatch(getNotCompleteCards({todoList: filtered}))
     })
 
   }

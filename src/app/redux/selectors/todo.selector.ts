@@ -18,13 +18,3 @@ export const selectToken = createSelector(
   (state: TodoState) => state.token
 );
 
-export const selectCompleteCards = createSelector(
-  selectFeature,
-  (state: TodoState) => state.complete
-);
-
-export const selectNotCompleteCards = createSelector(
-  selectFeature,
-  (state: TodoState) => state.notComplete
-);
-

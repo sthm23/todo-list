@@ -25,7 +25,7 @@ export class TodoMoreComponent implements OnInit {
   checker = false
   changeSomething = true
   card!:Todo;
-
+  checkBox!:boolean;
   form:FormGroup = new FormGroup({
     completed: new FormControl(false),
     title: new FormControl('')
@@ -41,7 +41,7 @@ export class TodoMoreComponent implements OnInit {
         })
       ).subscribe(el=>{
         this.card = el
-        this.form.get('completed')?.setValue(!el.completed)
+        this.form.get('completed')?.setValue(el.completed)
         this.form.get('title')?.setValue(el.title)
         this.checker = true
         this.form.valueChanges.subscribe(ch=>{
@@ -61,6 +61,7 @@ export class TodoMoreComponent implements OnInit {
     ).subscribe(el=>{
       this.store.dispatch(updateCard({todo: el}))
       this.card = el;
+      this.router.navigate(['home'])
     })
   }
 

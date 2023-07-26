@@ -7,8 +7,6 @@ export enum AppActions {
   todoCreate = '[Todo Page] create',
   todoUpdate = '[Todo Page] update',
   todoList = '[Todo Page] get all',
-  todoCompList = '[Todo Page] get all Complete',
-  todoNotCompList = '[Todo Page] get all Not Complete',
   todoGet = '[Todo more Page] get one',
   todoDelete = '[Todo Page] delete'
 }
@@ -34,16 +32,6 @@ export const updateCard = createAction(
 
 export const getAllCards = createAction(
   AppActions.todoList,
-  props<{todoList: Todo[]}>()
-);
-
-export const getCompleteCards = createAction(
-  AppActions.todoCompList,
-  props<{todoList: Todo[]}>()
-);
-
-export const getNotCompleteCards = createAction(
-  AppActions.todoNotCompList,
   props<{todoList: Todo[]}>()
 );
 

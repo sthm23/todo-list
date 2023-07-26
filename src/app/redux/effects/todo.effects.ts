@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType,  OnRunEffects } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { AppActions, getAllCards, getCompleteCards, getNotCompleteCards } from '../actions/todo.actions';
+import { AppActions, getAllCards } from '../actions/todo.actions';
 import { TodoService } from 'src/app/todo/todo-service.service';
 import { EMPTY } from 'rxjs';
 

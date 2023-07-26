@@ -3,15 +3,11 @@
     <h4>{{todoCard.title}}</h4>
   </div>
   <div class="btn-block">
-    <button mat-icon-button>
-      <mat-icon *ngIf="todoCard.completed">edit</mat-icon>
-      <mat-icon *ngIf="!todoCard.completed">check_circle_outline</mat-icon>
+    <button mat-icon-button [disabled]="todoCard.completed" (click)="goToMoreTodo()">
+      <mat-icon >{{ todoCard.completed === false ? 'edit' : 'check_circle_outline'}}</mat-icon>
     </button>
     <button mat-icon-button (click)="deleteTodoCard(todoCard.id)">
       <mat-icon>delete</mat-icon>
-    </button>
-    <button mat-icon-button (click)="goToMoreTodo()">
-      <mat-icon>launch</mat-icon>
     </button>
   </div>
 </div>
