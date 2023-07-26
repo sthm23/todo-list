@@ -25,7 +25,6 @@ export class TodoMainComponent implements OnInit {
 
   ngOnInit() {
     this.todoServ.getAllCards().pipe(
-      map(el=>el.results),
       catchError(err=>{
         this.allItems = undefined
         return throwError(()=>err)

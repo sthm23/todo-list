@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CreateTodo, Todo, TodoResponse, url } from '../models/interfaces';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -91,42 +92,36 @@ export class TodoService {
   ]
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
-  getOneCard(id: string):Todo | undefined {
-    return this.todoList.find(el=>el.id === id)
+  getOneCard(id: string) {
+    const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
+    const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
+    return this.http.get<Todo>(url+'/todo/'+id, {headers})
   }
 
   addOneCard(card:CreateTodo) {
-    const now = Date.now().toString();
-    const id = Math.floor(Math.random() * 100).toString();
-    const item = {...card, id: id, created_at: now, updated_at:now} as Todo
-    this.todoList.push(item)
+    const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
+    const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
+    return this.http.post<Todo>(url+'/todo/', card, {headers})
   }
 
   deleteOneCard(id:string) {
-    const card = this.todoList.findIndex(el=>el.id === id);
-
-    if(card !== -1) {
-      this.todoList.splice(card, 1)
-    }
+    const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
+    const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
+    return this.http.delete<Todo>(url+'/todo/'+id, {headers})
   }
 
   getAllCards() {
     const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
     const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
-    // return this.todoList
-    return this.http.get<TodoResponse>(url+'/todo/', {headers})
+    return this.http.get<TodoResponse>(url+'/todo/', {headers}).pipe(map(el=>el.results))
   }
 
   updateOneCard(id:string, card:CreateTodo) {
-    const item = this.todoList.findIndex(el=>el.id === id);
-
-    if(item !== -1) {
-      const oldCard = this.todoList.find(el=>el.id === id)!
-      const newCard = {...oldCard, ...card}
-      this.todoList.splice(item, 1, newCard)
-    }
+    const token = '7f01f83121a1340519aeda7810118fbfa86faf7c'
+    const headers = new HttpHeaders().append('Authorization', 'Token ' + token);
+    return this.http.put<Todo>(url+'/todo/'+id, card, {headers})
   }
 }

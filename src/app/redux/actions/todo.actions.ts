@@ -29,7 +29,7 @@ export const createCard = createAction(
 
 export const updateCard = createAction(
   AppActions.todoUpdate,
-  props<{ id: string; todo: CreateTodo }>()
+  props<{ todo: Todo }>()
 );
 
 export const getAllCards = createAction(

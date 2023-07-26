@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType,  OnRunEffects } from '@ngrx/effects';
-import { map } from 'rxjs/operators';
-import { AppActions, getCompleteCards, getNotCompleteCards } from '../actions/todo.actions';
+import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { AppActions, getAllCards, getCompleteCards, getNotCompleteCards } from '../actions/todo.actions';
+import { TodoService } from 'src/app/todo/todo-service.service';
+import { EMPTY } from 'rxjs';
 
 @Injectable()
 export class CreateAtEffects {
 
-  loadMovies$ = createEffect(() => this.actions$.pipe(
-
+  loadTodoCard$ = createEffect(() => this.actions$.pipe(
+    ofType(AppActions.todoUpdate, AppActions.todoDelete, AppActions.todoCreate),
+    exhaustMap(() => this.todoServ.getAllCards()
+    .pipe(
+      map(todoList => {
+        return getAllCards({todoList: todoList})
+      }),
+      catchError(() => EMPTY)
+    ))
   ));
 
   constructor(
     private actions$: Actions,
+    private todoServ: TodoService
   ) {}
 }

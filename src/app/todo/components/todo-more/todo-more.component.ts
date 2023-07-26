@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TodoService } from '../../todo-service.service';
 import { Todo } from 'src/app/models/interfaces';
 import { FormControl, FormGroup } from '@angular/forms';
+import { catchError, throwError } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { TodoState } from 'src/app/redux/reducers';
+import { updateCard } from 'src/app/redux/actions/todo.actions';
 
 @Component({
   selector: 'app-todo-more',
@@ -14,7 +18,8 @@ export class TodoMoreComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private todoServ: TodoService
+    private todoServ: TodoService,
+    private store: Store<{todo:TodoState}>
   ) {}
 
   checker = false
@@ -29,28 +34,34 @@ export class TodoMoreComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.url.subscribe(r=>{
       const url = r[0].path;
-      const card = this.todoServ.getOneCard(url);
-
-      if(card) {
-        this.card = card
-        this.form.get('completed')?.setValue(!card.completed)
-        this.form.get('title')?.setValue(card.title)
+      this.todoServ.getOneCard(url).pipe(
+        catchError(err=> {
+          this.router.navigate(['home', 'error'])
+          return throwError(()=>err)
+        })
+      ).subscribe(el=>{
+        this.card = el
+        this.form.get('completed')?.setValue(!el.completed)
+        this.form.get('title')?.setValue(el.title)
         this.checker = true
         this.form.valueChanges.subscribe(ch=>{
           this.changeSomething = false
         })
-      } else {
-        this.router.navigate(['home', 'error'])
-      }
+      });
     })
-
-
-
   }
 
   updateCard() {
-    console.log(this.form.value);
-
+    const card = {...this.card, ...this.form.value}
+    this.todoServ.updateOneCard(this.card.id, card).pipe(
+      catchError(err=> {
+        window.alert('some error with updating')
+        return throwError(()=>err)
+      })
+    ).subscribe(el=>{
+      this.store.dispatch(updateCard({todo: el}))
+      this.card = el;
+    })
   }
 
 }
