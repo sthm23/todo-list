@@ -1,5 +1,5 @@
 
-export const url = 'http://localhost:4200/api';
+export const url = 'https://dev--earnest-dango-46cf9e.netlify.app/api';
 export const url2 = 'https://joldibaev.uz';
 export interface Todo {
   id: string,
