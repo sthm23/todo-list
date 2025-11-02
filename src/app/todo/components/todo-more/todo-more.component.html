@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div class="back-btn-block">
+    <app-back-home-btn></app-back-home-btn>
+  </div>
+  <form [formGroup]="form">
+    <div class="card" *ngIf="checker;else loader">
+      <div class="title">
+        <h3>Title: </h3>
+        <input type="text" [value]="card.title" formControlName="title">
+      </div>
+      <div class="body">
+        <h5>Create date: </h5>
+        <p>{{card.created_at | date: 'full'}}</p>
+        <h5>Status: </h5>
+
+        <mat-checkbox
+          formControlName="completed"
+        >{{card.completed ? 'complete' : 'not complete'}}</mat-checkbox>
+      </div>
+      <div class="footer">
+        <button
+          mat-raised-button
+          [disabled]="changeSomething"
+          (click)="updateCard()"
+        >submit</button>
+      </div>
+    </div>
+  </form>
+
+  <ng-template #loader>
+    <app-spinner></app-spinner>
+  </ng-template>
+</div>

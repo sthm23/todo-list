@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <form [formGroup]="addCardForm" class="add-todo-block">
+    <input type="text" class="add-todo-inp" placeholder="Add todo" formControlName="title">
+    <button mat-icon-button (click)="addTodoCard()" [disabled]="addCardForm.invalid">
+      <mat-icon>note_add</mat-icon>
+    </button>
+  </form>
+  <div class="todo-block-wrapper" *ngIf="(allItems$ | async); else loader">
+    <div class="todo-block" *ngFor="let item of allItems$ | async">
+      <app-todo [todoCard]="item"></app-todo>
+    </div>
+  </div>
+
+  <ng-template #loader>
+    <app-spinner></app-spinner>
+  </ng-template>
+</div>

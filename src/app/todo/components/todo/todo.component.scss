@@ -1,0 +1,22 @@
+.card{
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+  width: 30vw;
+  padding: 9px;
+  margin: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  background-color: whitesmoke;
+  margin-left: 5px;
+}
+.remove{
+  background-color: rgb(255, 133, 133);
+}
